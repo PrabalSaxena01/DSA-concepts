@@ -1,0 +1,53 @@
+//using Dutch National Flag Algorithm   : Optimal
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        bool swapped;
+        for(int i = 0; i<nums.size() - 1;i++){
+            swapped = false;
+            for(int j = 0; i<nums.size() - 1 - j; j++){
+                if(nums[j] > nums[j+1]){
+                    swap(nums[j],nums[j+1]);
+                    swapped = true;
+                }
+            }
+            if(!swapped){
+                break;
+            }
+        }
+    }
+};
+
+
+//using Count sort
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int a=0;
+        int b=0;
+        int c=0;
+        int i=0;
+        for(;i<nums.size();i++){
+            if(nums[i]==0) a++;
+           if(nums[i]==1) b++;
+           if(nums[i]==2) c++;
+        }
+        i=0;
+        while(a>0){
+            nums[i]=0;
+            a--;
+            i++;
+        }
+         while(b>0){
+            nums[i]=1;
+            b--;
+            i++;
+        }
+        while(c>0){
+            nums[i]=2;
+            c--;
+            i++;
+        }
+        
+    }
+};
