@@ -1,0 +1,33 @@
+//brute force method 
+class Solution {
+public:
+    bool circularArrayLoop(vector<int>& nums) {
+        if (nums.size() < 2) {
+            return false;
+        }
+        for (int j = 0; j < nums.size(); j++) {
+            int a = j;
+            int i = nums[a];
+            int dir;
+            dir = i > 0 ? 1 : -1;
+            // int direction = nums[a] > 0 ? 1 : -1;
+            int b = (a + i + nums.size()) % nums.size();
+            int k = 0;
+            while (a != b && k < nums.size()) {
+                i = nums[b];
+                if ((i * dir) <0)
+                break;
+                 {
+                    b = (b + i + nums.size()) % nums.size();
+                    k++;
+                } 
+            }
+            
+            if (a == b && k > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+};
