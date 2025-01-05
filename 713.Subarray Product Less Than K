@@ -1,0 +1,20 @@
+// Brute force
+class Solution {
+public:
+    int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+        int a = 0;
+        int num = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            a = i;
+            int mul = 1;
+
+            while (mul < k && a<nums.size()) {
+                mul = mul * nums[a];
+                a++;
+                if(mul<k)
+                num++;
+            }
+        }
+        return num;
+    }
+};
