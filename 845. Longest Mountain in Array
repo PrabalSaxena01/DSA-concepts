@@ -1,0 +1,40 @@
+
+class Solution {
+public:
+    int longestMountain(vector<int>& arr) {
+        int n = arr.size();
+        if (n < 3) return 0;
+
+        int maxLength = 0;
+
+        for (int i = 1; i < n - 1;) {
+            if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {
+                int left = 0, right = 0;
+                int j = i - 1, k = i + 1;
+
+                // Expand left
+                while (j >= 0 && arr[j] > arr[j - 1]) {
+                    left++;
+                    j--;
+                }
+
+                // Expand right
+                while (k < n - 1 && arr[k] > arr[k + 1]) {
+                    right++;
+                    k++;
+                }
+
+                // Calculate the total length of the mountain
+                int length = left + right + 1;
+                maxLength = max(maxLength, length);
+
+                // Skip processed elements
+                i = k;
+            } else {
+                i++;
+            }
+        }
+
+        return maxLength;
+    }
+};
