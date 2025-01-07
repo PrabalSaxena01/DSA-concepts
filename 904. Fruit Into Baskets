@@ -2,12 +2,12 @@ class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
         int n = fruits.size();
-        if(n<=2){
+        if (n <= 2) {
             return n;
         }
-        int a, a_size, b, b_size, c, c_size;
-        a = a_size = b = b_size = c = c_size = 0;
-        while(fruits[a] == fruits[b] && b<n-1){
+        int a, a_size, b, b_size;
+        a = a_size = b = b_size =0;
+        while (fruits[a] == fruits[b] && b < n - 1) {
             b++;
         }
         int count = 0;
@@ -17,21 +17,24 @@ public:
 
             if (fruits[i] == fruits[a] || fruits[i] == fruits[b]) {
                 count++;
-                if(fruits[i] != fruits[a]){
+                if (fruits[i] != fruits[a]) {
                     b_size++;
-                }
-                else{
+                    a_size = 0;
+                } else {
+                    a_size++;
                     b_size = 0;
                 }
                 i++;
             } else {
                 maxcount = (count > maxcount) ? count : maxcount;
-                count = (b_size>1)?b_size:1;
-                a = b;
-                b = i;
-                b_size = 0;
+
+                    count = (b_size > a_size) ? b_size : a_size;
+                    b_size = 0;
+                    a = i - 1;
+                    b = i;
+                    a_size = 0;
             }
-         maxcount = (count > maxcount) ? count : maxcount;
+            maxcount = (count > maxcount) ? count : maxcount;
         }
         return maxcount;
     }
