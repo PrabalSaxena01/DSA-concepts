@@ -1,0 +1,55 @@
+//spce approach incomplete 
+class Solution {
+public:
+    vector<vector<int>> intervalIntersection(vector<vector<int>>& firstList,
+                                             vector<vector<int>>& secondList) {
+        vector<int> space(1000, 1);
+        int i = 0;
+        int j = 0;
+        for (; i < firstList.size(); i++) {
+            int a = firstList[i][0];
+            int b = firstList[i][1];
+            space[a] *= 2;
+            a++;
+            space[b] *= 2;
+            while (a < b) {
+                space[a] *= 3;
+                a++;
+            }
+        }
+        for (; j < secondList.size(); j++) {
+            int a = secondList[j][0];
+            int b = secondList[j][1];
+            space[a] *= 5;
+            a++;
+            space[b] *= 5;
+            while (a < b) {
+                space[a] *= 7;
+                a++;
+            }
+        }
+        vector<vector<int>> List;
+        int k = 0;
+        int l = 0;
+
+        while (k < i || k < j) {
+            int sw = 1;
+            if (space[k] == 10) {
+                List[l][0] = space[k];
+                List[l][1] = space[k];
+                l++;
+            } else if (space[k] == 14 || space[k] == 21 || space[k] == 15) {
+                if (sw = 1) {
+                    List[l][0] = space[k];
+                    sw = 2;
+                } else {
+                    List[l][1] = space[k];
+                    l++;
+                    sw = 1;
+                }
+            }
+            k++;
+        }
+        return List;
+    }
+};
