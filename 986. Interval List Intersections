@@ -53,3 +53,33 @@ public:
         return List;
     }
 };
+//optimal approach
+class Solution {
+public:
+    vector<vector<int>> intervalIntersection(vector<vector<int>>& firstList,
+                                             vector<vector<int>>& secondList) {
+        vector<vector<int>> result;
+        int i = 0, j = 0;
+
+        while (i < firstList.size() && j < secondList.size()) {
+            int a = firstList[i][0];  // Start of first interval
+            int b = firstList[i][1];  // End of first interval
+            int c = secondList[j][0]; // Start of second interval
+            int d = secondList[j][1]; // End of second interval
+
+            // Check for intersection
+            if (max(a, c) <= min(b, d)) {
+                result.push_back({max(a, c), min(b, d)});
+            }
+
+            // Move the pointer of the interval that ends first
+            if (b < d) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        return result;
+    }
+};
