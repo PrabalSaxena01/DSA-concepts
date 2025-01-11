@@ -1,0 +1,25 @@
+// optimal two pointer solution
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int n =  height.size();
+        int a = 0;
+        int b =n-1;
+        int d = n-1;
+        int maxarea=0;
+        while(d>0){
+            int h = min(height[a],height[b]);
+            int area = h*d;
+            if(height[a]<height[b]){
+                a++;
+            }
+            else
+            b--;
+
+            d=b-a;
+            if(area>maxarea)
+            maxarea = area;
+        }
+        return maxarea;
+    }
+};
