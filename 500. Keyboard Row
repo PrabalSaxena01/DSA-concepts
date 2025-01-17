@@ -1,0 +1,47 @@
+//npos???
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+        // Define the keyboard rows
+        string row1 = "qwertyuiop";
+        string row2 = "asdfghjkl";
+        string row3 = "zxcvbnm";
+
+        // Result vector to store valid words
+        vector<string> result;
+
+        for (string word : words) {
+            // Convert the word to lowercase for case-insensitivity
+            string lowerWord = "";
+            for (char ch : word) {
+                lowerWord += tolower(ch);
+            }
+
+            // Check which row the first letter belongs to
+            string row;
+            if (row1.find(lowerWord[0]) != string::npos) {
+                row = row1;
+            } else if (row2.find(lowerWord[0]) != string::npos) {
+                row = row2;
+            } else if (row3.find(lowerWord[0]) != string::npos) {
+                row = row3;
+            }
+
+            // Check if all letters belong to the same row
+            bool valid = true;
+            for (char ch : lowerWord) {
+                if (row.find(ch) == string::npos) {
+                    valid = false;
+                    break;
+                }
+            }
+
+            // If valid, add to result
+            if (valid) {
+                result.push_back(word);
+            }
+        }
+
+        return result;
+    }
+};
