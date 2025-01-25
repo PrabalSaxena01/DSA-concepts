@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
+        int low = 0;
+        int high = nums.size() - 1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (nums[mid] == target) {
+                return true;
+            }
+
+            if (nums[low] == nums[high] && low <= high && high > 0) {
+                if (nums[low] == target || nums[high] == target)
+                    return true;
+                low++;
+                high--;
+                continue;
+            }
+            if (nums[low] <= nums[mid]) { // left sorted
+                if (nums[mid] > target && target >= nums[low]) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else { // right sorted
+                if (nums[mid] < target && target <= nums[high]) {
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
+
+            // if (nums[low] == nums[high]) {
+            //     low = low + 1;
+            //     high = high - 1;
+            // }
+        }
+        return false;
+    }
+};
