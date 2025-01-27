@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int s = nums.size();
+        int i = s - 2;
+        int ind = -1;
+        for (; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
+                ind = i;
+                break;
+            }
+        }
+        if (ind==-1){
+            reverse(nums.begin(),nums.end());
+        }
+        else{
+            i = s-1;
+            while(nums[i]<=nums[ind] && i>ind){
+                i--;
+            }
+            swap(nums[ind],nums[i]);
+            reverse(nums.begin()+ind+1,nums.end());
+        }
+    }
+};
