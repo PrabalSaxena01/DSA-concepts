@@ -1,0 +1,49 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        int i = 0;
+        vector<int> v;
+        while (i < s.size()) {
+            if (s[i] == '(') {
+
+                v.push_back('(');
+            }
+            if (s[i] == '{') {
+
+                v.push_back('{');
+            }
+            if (s[i] == '[') {
+
+                v.push_back('[');
+            }
+
+            if (s[i] == ')') {
+
+                if (v.size()==0 || v.back() != '(')
+                    return false;
+                else
+                    v.erase(v.end() - 1);
+            }
+            if (s[i] == '}') {
+
+                if (v.size()==0 || v.back() != '{')
+                    return false;
+                else
+                    v.erase(v.end() - 1);
+            }
+            if (s[i] == ']') {
+                {
+                    if (v.size()==0 || v.back() != '[')
+                        return false;
+                    else
+                        v.erase(v.end() - 1);
+                }
+            }
+            i++;
+        }
+        if(v.size()==0)
+        return true;
+        else
+        return false;
+    }
+};
