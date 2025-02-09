@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int n = s.size();
+        if (n == 1) {
+            if (s[0] == 32)
+                return 0;
+            else
+                return 1;
+        }
+
+        int i = n - 1;
+        int count = 0;
+        while (s[i] == 32) {
+            i--;
+        }
+        while (i >=0 && s[i] != 32) {
+            count++;
+            i--;
+        }
+
+        
+        return count;
+    }
+};
