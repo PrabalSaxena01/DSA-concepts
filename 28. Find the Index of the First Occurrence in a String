@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        int l = 0;
+        int k = 0;
+        for (int r = 0; r < haystack.size(); r++) {
+            k=0;
+            while (k < needle.size() && haystack[r+k] == needle[k]) {
+                k++;
+            }
+            if (k == needle.size()) {
+                return r;
+            }
+        }
+        return -1;
+    }
+};
