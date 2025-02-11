@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool isThree(int n) {
+        if (n <= 3)
+        return false ;
+        int i = n - 1;
+        bool flag = false;
+        while (i > 1) {
+            if (i % n == 0) {
+                if (flag == true) {
+                    return false;
+                }
+                flag = true;
+            }
+            i--;
+        }
+        return true;
+    }
+};
