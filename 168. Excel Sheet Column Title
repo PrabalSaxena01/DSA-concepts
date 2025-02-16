@@ -1,0 +1,16 @@
+class Solution {
+public:
+#include<cstring>
+    string convertToTitle(int n) {
+        
+        string t="";
+      
+        while(n>0){
+            n--;
+            t+=(char(((n)%26)+'A'));
+            n=(n)/26;
+        }
+        reverse(t.begin(), t.end());
+        return t;
+    }
+};
