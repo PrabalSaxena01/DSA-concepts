@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool checkPerfectNumber(int num) {
+        if (num == 0 || num == 1) {
+            return false;
+        }
+        int k = 2;
+        int sum = 1;
+        while (k <= sqrt(num)) {
+            if (num % k == 0) {
+                sum += k;
+                if (k != num / k)
+                    sum += num / k;
+            }
+            k++;
+        }
+        if (sum == num) {
+            return true;
+        } else
+            return false;
+    }
+};
