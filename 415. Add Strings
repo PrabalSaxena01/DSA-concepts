@@ -1,0 +1,20 @@
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+        string result="";
+        int carry = 0 ;
+        int a = num1.size()-1;
+        int b = num2.size()-1;
+      
+        while(a>=0 || b>=0|| carry){
+            int sum =carry;
+            if(a>=0) sum+=(num1[a--] -'0');
+            if(b>=0) sum+=(num2[b--] - '0');
+            
+            carry = (sum/10);
+            sum = sum%10;
+            result= to_string(sum) + result;
+        }
+    return result;
+    }
+};
