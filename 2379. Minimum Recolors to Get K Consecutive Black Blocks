@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int minimumRecolors(string blocks, int k) {
+
+        int recolor = INT_MAX;
+        for (int i = 0; i <= blocks.size()-k; i++) {
+            int left = i;
+            int right = left + k;
+            int count_bl = 0;
+            while (left < right) {
+                if ((blocks[left++]) != 'B') {
+                    count_bl++;
+                }
+            }
+            recolor = recolor > count_bl ? count_bl : recolor;
+        }
+
+        return recolor;
+    }
+};
