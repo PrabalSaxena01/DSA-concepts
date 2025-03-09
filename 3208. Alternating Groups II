@@ -1,0 +1,24 @@
+//TLE
+class Solution {
+public:
+    int numberOfAlternatingGroups(vector<int>& colors, int k) {
+        int s = colors.size();
+        int count = 0;
+        for (int i = 0; i < s; i++) {
+            // int p = i;
+            bool valid = true;
+            for (int j = 0; j < k - 1; j++) {
+                if (colors[(j + i) % s] != colors[(j + i + 1) % s]) {
+
+                } else {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid == true) {
+                count++;
+            }
+        }
+        return count;
+    }
+};
