@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int maximumCandies(vector<int>& candies, long long k) {
+        long long min = LLONG_MAX;
+        long long max = LLONG_MIN;
+        long long sum = 0;
+        for(int i = 0; i < candies.size(); i++) {
+            sum += candies[i];
+
+            if (min > candies[i]) {
+                min = candies[i];
+            }
+
+            if (max < candies[i]) {
+                max = candies[i];
+            }
+        }
+
+        long long start = 0;
+        long long end = sum;
+        long long ans = 0;
+        while(start <= end) {
+            long long mid = start + ((end - start) / 2);
+        
+
+            long long expected = mid / k; 
+            long long count = 0;
+
+            if (expected != 0) {
+                for(int candy : candies) {
+                    count += candy / expected;
+                }
+            }
+
+            if (count >= k || expected == 0) {
+                ans = mid / k;
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        return (int) ans;
+    }
+};
