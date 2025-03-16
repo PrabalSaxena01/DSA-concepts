@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool ispossible(long long mid, vector<int>& nums, int cars) {
+        long long count = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            count += sqrt(mid / nums[i]);
+        }
+        return (count >= cars);
+    }
+
+    long long repairCars(vector<int>& ranks, int cars) {
+        long long min = *min_element(ranks.begin(), ranks.end());
+        long long min_time = ((long long) cars) * ((long long) cars) * min;
+
+        long long start = 1;
+        long long end = min_time;
+   long long ans = 0;
+        while (start <= end) {
+         
+            long long mid = start + (end - start) / 2;
+            if (ispossible(mid, ranks, cars)) {
+                end = mid - 1;
+                ans = mid;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+};
