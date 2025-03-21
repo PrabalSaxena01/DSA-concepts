@@ -1,0 +1,41 @@
+class Solution {
+public:
+    vector<string> findAllRecipes(vector<string>& recipes,
+                                  vector<vector<string>>& ingredients,
+                                  vector<string>& supplies) {
+        unordered_map<string, int> sup;
+        for (auto& i : supplies)
+            sup[i] = 1;
+
+        vector<string> result;
+        int n = recipes.size();
+        vector<int> rec(n, 0);
+
+        while (true) {
+            bool updated = false;  
+            
+            for (int i = 0; i < n; i++) {
+                if (rec[i] == 1) continue; 
+                
+                bool canMake = true;
+                for (auto& j : ingredients[i]) {
+                    if (sup.find(j) == sup.end()) { // If any ingredient is missing
+                        canMake = false;
+                        break;
+                    }
+                }
+
+                if (canMake) {
+                    result.push_back(recipes[i]);
+                    rec[i] = 1;
+                    sup[recipes[i]] = 1; // Mark recipe as available
+                    updated = true;
+                }
+            }
+
+            if (!updated) break;
+        }
+
+        return result;
+    }
+};
