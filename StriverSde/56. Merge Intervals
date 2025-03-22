@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& iv) {
+        int n = iv.size();
+        if (n <= 1)
+            return iv;
+        sort(iv.begin(), iv.end(),
+             [](const vector<int>& a, const vector<int>& b) {
+                 return a[0] <
+                        b[0]; // Sorting by second element in ascending order
+             });
+
+        vector<vector<int>> result;
+      
+        vector<int> temp;
+        temp.push_back(iv[0][0]); // Push first value
+        temp.push_back(iv[0][1]); // Push second value
+        result.push_back(temp);
+        int k = 0;
+        for (int i = 1; i < n; i++) {
+            if (result[k][1] < iv[i][0]) {
+                vector<int> tempo;
+                tempo.push_back(iv[i][0]); // Push first value
+                tempo.push_back(iv[i][1]); // Push second value
+                result.push_back(tempo);
+                k++;
+            } else {
+                result[k][1] = max(result[k][1],iv[i][1]);
+            }
+        }
+        return result;
+    }
+};
