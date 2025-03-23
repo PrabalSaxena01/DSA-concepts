@@ -1,0 +1,33 @@
+//Hashset
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+std::unordered_map<int, int> freq;
+
+        for (int num : nums) {
+            if (++freq[num] > 1) {
+                return num; // Found the duplicate
+            }
+        }
+        return -1; // Should never
+    }
+};
+
+//Hare tortoise
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        int slow = 0, fast = 0;
+        do {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        } while (slow != fast);
+        
+        slow = 0;
+        while (slow != fast) {
+            slow = nums[slow]; // Move slow one step
+            fast = nums[fast]; // Move fast one step
+        }
+        return slow;
+    }
+};
