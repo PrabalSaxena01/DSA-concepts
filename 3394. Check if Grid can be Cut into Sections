@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool merge(vector<vector<int>>& iv) {
+        int n = iv.size();
+        if (n <= 1) return false; // No cuts possible with one interval
+        
+        // Sort by the start of intervals (O(n log n))
+        sort(iv.begin(), iv.end());
+
+        int cut = 0;
+        int index = 0;  // Merging in-place
+
+        for (int i = 1; i < n; i++) {
+            if (iv[index][1] <= iv[i][0]) {  // If there's a gap
+                cut++;
+                index++;  // Move to the next slot
+                iv[index] = iv[i];  // Store the new segment
+            } else {
+                iv[index][1] = max(iv[index][1], iv[i][1]);  // Merge overlapping intervals
+            }
+        }
+        
+        return cut >= 2; // Check for at least one valid cut
+    }
+
+    bool checkValidCuts(int n, vector<vector<int>>& rectangles) {
+        vector<vector<int>> x, y;
+
+        for (auto &rect : rectangles) {
+            x.push_back({rect[0], rect[2]});
+            y.push_back({rect[1], rect[3]});
+        }
+
+        return merge(x) || merge(y);
+    }
+};
