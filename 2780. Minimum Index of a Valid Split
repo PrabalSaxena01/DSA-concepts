@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int minimumIndex(vector<int>& nums) {
+        unordered_map<int, int> freq2; 
+        for (int num : nums) {
+            freq2[num]++;
+        }
+        unordered_map<int, int> freq1;
+        for(int i =0;i<nums.size();i++){
+            const int a = ++freq1[nums[i]];
+            const int b = --freq2[nums[i]];
+            if((a*2)>i+1 && (b*2)>nums.size()-i-1) return i;
+        } 
+        return -1;
+        
+    }
+};
