@@ -1,5 +1,4 @@
 class Solution {
-
 public:
     long long greatest(vector<vector<int>>& questions, int pos,
                        vector < long long > &mem) {
