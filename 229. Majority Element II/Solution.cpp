@@ -1,0 +1,45 @@
+class Solution {
+public:
+    bool check(vector<int>& nums, int a) {
+        int n = nums.size();
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (a == nums[i])
+                count++;
+        }
+        bool res = count > (n / 3) ? true : false;
+        return res;
+    }
+    vector<int> majorityElement(vector<int>& nums) {
+        vector<int> result;
+        int n = nums.size();
+        int count1 = 0;
+        int count2 = 0;
+        int maxelement1 = -1;
+        int maxelement2 = -1;
+        for (int i = 0; i < n; i++) {
+            if (maxelement1 == nums[i])
+                count1++;
+            else if (maxelement2 == nums[i])
+                count2++;
+            else if (count1 == 0) {
+                maxelement1 = nums[i];
+                count1 = 1;
+            } else if (count2 == 0) {
+                maxelement2 = nums[i];
+                count2 = 1;
+            } else {
+                count1--;
+                count2--;
+            }
+        }
+        if (check(nums, maxelement1))
+            result.push_back(maxelement1);
+        if (maxelement1 == maxelement2)
+            return result;
+
+        if (check(nums, maxelement2))
+            result.push_back(maxelement2);
+        return result;
+    }
+};
