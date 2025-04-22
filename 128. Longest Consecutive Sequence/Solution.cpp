@@ -1,18 +1,33 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        if(nums.size() < 2) return nums.size();
-        int maxcount = 0;
-        unordered_set<int> s(nums.begin(), nums.end());
-
-        for (auto num : s) {
-            if (s.find(num - 1) != s.end())
-                continue;
-            int ser = 1;
-            while (s.find(++num) != s.end())
-                ser++;
-            maxcount = max(maxcount, ser);
+        int n = nums.size();
+        if (n < 2) return n;
+        
+        // Build hash table with one reservation to avoid rehashing
+        unordered_set<int> s;
+        s.reserve(n);
+        for (int x : nums) {
+            s.insert(x);
         }
-        return maxcount;
+        
+        int maxCount = 1;
+        // Only start counting at the beginning of each sequence
+        for (const int x : s) {
+            if (s.count(x - 1)) 
+                continue;
+            
+            int current = x;
+            int count = 1;
+            // Walk forward until the sequence ends
+            while (s.count(current + 1)) {
+                ++current;
+                ++count;
+            }
+            
+            maxCount = max(maxCount, count);
+        }
+        
+        return maxCount;
     }
 };
