@@ -1,16 +1,16 @@
 class Solution {
 public:
     string clearDigits(string s) {
-        int charIndex = 0;
-        while (charIndex < s.size()) {
+         string answer;
+
+        for (int charIndex = 0; charIndex < s.size(); charIndex++) {
             if (isdigit(s[charIndex])) {
-                s.erase(charIndex, 1);
-                s.erase(charIndex - 1, 1);
-                charIndex--;
+                answer.pop_back();
             } else {
-                charIndex++;
+                answer += s[charIndex];
             }
         }
-        return s;
+
+        return answer;
     }
 };
