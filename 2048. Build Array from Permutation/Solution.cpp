@@ -1,10 +1,12 @@
 class Solution {
-public:
+public:// best solution
     vector<int> buildArray(vector<int>& nums) {
-        vector<int> result;
-        for(int i : nums){
-            result.push_back(nums[i]);
-        }
-        return result;
+        for (int i = 0; i < nums.size(); i++) 
+            nums[i] += (1024 * (nums[nums[i]] % 1024));
+        
+        for (int i = 0; i < nums.size(); i++) 
+            nums[i] /= 1024;
+        
+        return nums;
     }
 };
